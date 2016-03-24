@@ -1,94 +1,20 @@
-setIframeHeight
-==============================
-
-Set iframe height to fit iframe content - works cross-domain
-
-
-Demo
-----
-
-[https://rawgit.com/FaiblUG/setIframeHeight/master/demo/index.html](https://rawgit.com/FaiblUG/setIframeHeight/master/demo/index.html)
-
-
-Usage
------
-
-### Parent Page
-
-#### 1. Include iframe
-    
-    <iframe scrolling="no" src="..."></iframe>
-
-#### 2. Include jQuery
-    
-You can skip this step if jQuery is already included in your page. 
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    
-#### 3. Include Script
-    
-    <script src="dist/set-iframe-height-parent-min.js" async></script>
-
-### Iframe Page
-
-#### 1. Include Script
-    
-    <script src="dist/set-iframe-height-child-min.js" async></script>
-
-#### 2. Include jQuery
-    
-You can skip this step if jQuery is already included in the iframe page. 
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    
-### Advanced Options
-
-#### Deep Links
-
-[Demo](https://demo.jonasfischer.net/Faibl/setIframeHeight/)
-
-If you want you parent url to be updated whenever the iframe url changes, you need to supply a deep link pattern on the iframe tag:
-
-    <iframe src="..." data-iframeAutoHeight-deepLinkPattern="/path/to/parent-page/?iframe_target=%deepLinkIframeSrc%"></iframe>
-    
-When rendering your page, you need to validate the value of the iframe_target GET Parameter and if it is valid, you can put the value into the iframe src attribute.
-
-This allows the user to reload, bookmark or share deep-linked iframe content within your parent frame.
-
-If you need to take action whenever the deep link changes, e.g. to dynamically update social share buttons, you can listen to the window.setIframeHeight:deepLink:changed event:
-
-    jQuery(window).on('setIframeHeight:deepLink:changed', function(e, data) {
-        console.log(data);
-        // Object {childUrl: "http://..", parentUrl: "http://..."}
-    });
-
-This event is fired in the parent page and in the iframe itself.
-
-#### Events
-
-The following events are triggered on the window object of the parent page:
-
-setIframeHeight: is periodically triggered (fires very often)
-setIframeHeight:enlarged: is triggered whenever the iframe got enlarged
-setIframeHeight:shrinked: is triggered whenever the iframe got shrinked
-
-Example usage:
-
-    jQuery(window)
-        .on('setIframeHeight:shrinked', function (e, data) {
-            console.log('iframe shrinked', data);
-            window.scroll(0,0);
-        })
-        .on('setIframeHeight:enlarged', function (e, data) {
-            console.log('iframe enlarged', data);
-        })
-    ;
-
-
-#### Support for amp-iframe (Accelerated Mobile Pages Project)
-
-[Demo](https://rawgit.com/FaiblUG/setIframeHeight/master/demo/amp-iframe-demo.html)
-
-For implementation details, check the [demo sourcecode](https://github.com/FaiblUG/setIframeHeight/blob/master/demo/amp-iframe-demo.html) and the [amp-iframe documentation](https://github.com/ampproject/amphtml/blob/master/extensions/amp-iframe/amp-iframe.md)
-
-Thanks to [mthiele](https://github.com/mthieleguj) for this contribution.
+<div id="readme" class="readme boxed-group clearfix announce instapaper_body md"><h3><svg aria-hidden="true" class="octicon octicon-book" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M2 5h4v1H2v-1z m0 3h4v-1H2v1z m0 2h4v-1H2v1z m11-5H9v1h4v-1z m0 2H9v1h4v-1z m0 2H9v1h4v-1z m2-6v9c0 0.55-0.45 1-1 1H8.5l-1 1-1-1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h5.5l1 1 1-1h5.5c0.55 0 1 0.45 1 1z m-8 0.5l-0.5-0.5H1v9h6V3.5z m7-0.5H8.5l-0.5 0.5v8.5h6V3z"></path></svg><trans data-src="README.md" data-dst="readme.md">readme.md</trans></h3><article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-setiframeheight" class="anchor" href="#setiframeheight" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="setIframeHeight" data-dst="setiframeheight">setiframeheight</trans></h1><p><trans data-src="Set iframe height to fit iframe content - works cross-domain" data-dst="设置iframe的高度以适应iframe内容作品的跨域">设置iframe的高度以适应iframe内容作品的跨域</trans></p><h2><a id="user-content-demo" class="anchor" href="#demo" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="Demo" data-dst="演示">演示</trans></h2><p><a href="https://rawgit.com/FaiblUG/setIframeHeight/master/demo/index.html"><trans data-src="https://rawgit.com/FaiblUG/setIframeHeight/master/demo/index.html" data-dst="http://///rawgit.com faiblug setiframeheight硕士/演示。">http://///rawgit.com faiblug setiframeheight硕士/演示。</trans></a></p><h2><a id="user-content-usage" class="anchor" href="#usage" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="Usage" data-dst="使用" style="background: transparent;">使用</trans></h2><h3><a id="user-content-parent-page" class="anchor" href="#parent-page" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="Parent Page" data-dst="父页面">父页面</trans></h3><h4><a id="user-content-1-include-iframe" class="anchor" href="#1-include-iframe" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="1. Include iframe" data-dst="1。包括iframe">1。包括iframe</trans></h4><pre><code>&lt;iframe scrolling="no" src="..."&gt;&lt;/iframe&gt;
+</code></pre><h4><a id="user-content-2-include-jquery" class="anchor" href="#2-include-jquery" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="2. Include jQuery" data-dst="2。包括jQuery" style="background: transparent;">2。包括jQuery</trans></h4><p><trans data-src="You can skip this step if jQuery is already included in your page." data-dst="你如果jQuery已经包含在您的网页，跳过这一步。">你如果jQuery已经包含在您的网页，跳过这一步。</trans></p><pre><code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre><h4><a id="user-content-3-include-script" class="anchor" href="#3-include-script" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="3. Include Script" data-dst="3。包括脚本">3。包括脚本</trans></h4><pre><code>&lt;script src="dist/set-iframe-height-parent-min.js" async&gt;&lt;/script&gt;
+</code></pre><h3><a id="user-content-iframe-page" class="anchor" href="#iframe-page" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="Iframe Page" data-dst="iframe页面">iframe页面</trans></h3><h4><a id="user-content-1-include-script" class="anchor" href="#1-include-script" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="1. Include Script" data-dst="1。包括脚本">1。包括脚本</trans></h4><pre><code>&lt;script src="dist/set-iframe-height-child-min.js" async&gt;&lt;/script&gt;
+</code></pre><h4><a id="user-content-2-include-jquery-1" class="anchor" href="#2-include-jquery-1" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="2. Include jQuery" data-dst="2。包括jQuery">2。包括jQuery</trans></h4><p><trans data-src="You can skip this step if jQuery is already included in the iframe page." data-dst="你如果jQuery已经包含在iframe页面跳过这一步。">你如果jQuery已经包含在iframe页面跳过这一步。</trans></p><pre><code>&lt;script src="//ajax.c2cmalls.com/ajax/libs/jquery/2.1.4/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre><h3><a id="user-content-advanced-options" class="anchor" href="#advanced-options" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="Advanced Options" data-dst="高级选项">高级选项</trans></h3><h4><a id="user-content-deep-links" class="anchor" href="#deep-links" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="Deep Links" data-dst="深度链接">深度链接</trans></h4><p><a href="https://demo.jonasfischer.net/Faibl/setIframeHeight/"><trans data-src="Demo" data-dst="演示">演示</trans></a></p><p><trans data-src="If you want you parent url to be updated whenever the iframe url changes, you need to supply a deep link pattern on the iframe tag:" data-dst="如果你想你的父母URL更新每当iframe的URL变化，你需要提供的iframe标签深链接模式:">如果你想你的父母URL更新每当iframe的URL变化，你需要提供的iframe标签深链接模式:</trans></p><pre><code>&lt;iframe src="..." data-iframeAutoHeight-deepLinkPattern="/path/to/parent-page/?iframe_target=%deepLinkIframeSrc%"&gt;&lt;/iframe&gt;
+</code></pre><p><trans data-src="When rendering your page, you need to validate the value of the iframe_target GET Parameter and if it is valid, you can put the value into the iframe src attribute." data-dst="当渲染你的页面，你需要验证的iframe_target价值获取参数，如果它是有效的，你可以把值插入iframe的src属性。">当渲染你的页面，你需要验证的iframe_target价值获取参数，如果它是有效的，你可以把值插入iframe的src属性。</trans></p><p><trans data-src="This allows the user to reload, bookmark or share deep-linked iframe content within your parent frame." data-dst="这允许用户重新加载，书签或分享的深层链接的内容在你的父框架iframe。">这允许用户重新加载，书签或分享的深层链接的内容在你的父框架iframe。</trans></p><p><trans data-src="If you need to take action whenever the deep link changes, e.g. to dynamically update social share buttons, you can listen to the window.setIframeHeight:deepLink:changed event:" data-dst="如果你需要采取行动时，深层链接的变化，例如动态更新的社会共享按钮，你可以听的窗口。setiframeheight:Deeplink:改变事件:">如果你需要采取行动时，深层链接的变化，例如动态更新的社会共享按钮，你可以听的窗口。setiframeheight:Deeplink:改变事件:</trans></p><pre><code>jQuery(window).on('setIframeHeight:deepLink:changed', function(e, data) {
+    console.log(data);
+    //Object {childUrl: "http://..", parentUrl: "http://..."}
+});
+</code></pre><p><trans data-src="This event is fired in the parent page and in the iframe itself." data-dst="本次活动是在父页面和iframe本身发射。">本次活动是在父页面和iframe本身发射。</trans></p><h4><a id="user-content-events" class="anchor" href="#events" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="Events" data-dst="事件">事件</trans></h4><p><trans data-src="The following events are triggered on the window object of the parent page:" data-dst="以下的事件是在父页面窗口对象触发:">以下的事件是在父页面窗口对象触发:</trans></p><p><trans data-src="setIframeHeight: is periodically triggered (fires very often)setIframeHeight:enlarged: is triggered whenever the iframe got enlargedsetIframeHeight:shrinked: is triggered whenever the iframe got shrinked" data-dst="setiframeheight:定期（经常引发火灾）setiframeheight:放大:被触发时，iframe有enlargedsetiframeheight:缩小:被触发时，iframe有缩小">setiframeheight:定期（经常引发火灾）setiframeheight:放大:被触发时，iframe有enlargedsetiframeheight:缩小:被触发时，iframe有缩小</trans></p><p><trans data-src="Example usage:" data-dst="使用示例:">使用示例:</trans></p><pre><code>jQuery(window)
+    .on('setIframeHeight:shrinked', function (e, data) {
+        console.log('iframe shrinked', data);
+        window.scroll(0,0);
+    })
+    .on('setIframeHeight:enlarged', function (e, data) {
+        console.log('iframe enlarged', data);
+    })
+;
+</code></pre><h4><a id="user-content-support-for-amp-iframe-accelerated-mobile-pages-project" class="anchor" href="#support-for-amp-iframe-accelerated-mobile-pages-project" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><trans data-src="Support for amp-iframe (Accelerated Mobile Pages Project)" data-dst="AMP iframe支持（加速移动页面的项目）">AMP iframe支持（加速移动页面的项目）</trans></h4><p><a href="https://rawgit.com/FaiblUG/setIframeHeight/master/demo/amp-iframe-demo.html"><trans data-src="Demo" data-dst="演示">演示</trans></a></p><p><trans data-src="For implementation details, check the" data-dst="为实现细节，检查">为实现细节，检查</trans><a href="https://github.com/FaiblUG/setIframeHeight/blob/master/demo/amp-iframe-demo.html"><trans data-src="demo sourcecode" data-dst="演示的源代码">演示的源代码</trans></a><trans data-src="and the" data-dst="和">和</trans><a href="https://github.com/ampproject/amphtml/blob/master/extensions/amp-iframe/amp-iframe.md"><trans data-src="amp-iframe documentation" data-dst="AMP iframe文件">AMP iframe文件</trans></a></p><p><trans data-src="Thanks to" data-dst="感谢">感谢</trans><a href="https://github.com/mthieleguj"><trans data-src="mthiele" data-dst="mthiele">mthiele</trans></a><trans data-src="for this contribution." data-dst="这方面的贡献。">这方面的贡献</trans></p></article></div>
